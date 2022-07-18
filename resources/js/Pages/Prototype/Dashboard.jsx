@@ -24,7 +24,7 @@ export default function Dashboard(){
             />
             <title>Dashboard</title>
         </Head>
-
+{/* Featured Movie */}
         <div>
             <div className="font-semibold text-[22px] text-black mb-4">Featured Movies</div>
                 <Flickity className="gap-[30px]" options={flickityOptions}>
@@ -42,6 +42,7 @@ export default function Dashboard(){
                 </Flickity>
         </div>
 
+{/* browse */}
         <div className="mt-[50px]">
             <div className="font-semibold text-[22px] text-black mb-4">Browse</div>
             <Flickity className="gap-[30px]" options={flickityOptions}>
