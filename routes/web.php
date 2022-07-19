@@ -14,21 +14,46 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('admin', function() {
-    return 'Hi Admin';
-    })->middleware('role:admin');
+// Route::get('admin', function() {
+//     return 'Hi Admin';
+//     })->middleware('role:admin');
 
-Route::get('user', function() {
-    return 'Hi User';
-    })->middleware('role:user');
+// Route::get('user', function() {
+//     return 'Hi User';
+//     })->middleware('role:user');
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
+Route::redirect('/', '/prototype/login');
+
+Route::prefix('prototype')->name('prototype.')->group(function () {
+    route::get('/login', function () {
+        return Inertia::render('Prototype/Login');
+    })->name('login');
+
+    route::get('/register', function () {
+        return Inertia::render('Prototype/Register');
+        // return 'Assalamualaikum';
+    })->name('register');
+
+    route::get('/dashboard', function () {
+        return Inertia::render('Prototype/Dashboard');
+    })->name('dashboard');
+
+    route::get('/subscriptionPlan', function () {
+        return Inertia::render('Prototype/SubscriptionPlan');
+    })->name('subscriptionPlan');
+
+    route::get('/movie/{slug}', function () {
+        return Inertia::render('Prototype/Movie/Show');
+    })->name('movie.show');
 });
 
 Route::get('/dashboard', function () {
