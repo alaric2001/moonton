@@ -1,4 +1,5 @@
 import PropType from "prop-types";
+import {Link} from '@inertiajs/inertia-react'
 
 MovieCard.propType = {
     slug: PropType.string.isRequired,
@@ -7,6 +8,7 @@ MovieCard.propType = {
     thumbnail: PropType.string.isRequired,
 };
 
+// fitur browse
 export default function MovieCard ({ slug, name, category, thumbnail }){
     return (
         <div className="absolute group overflow-hidden mr-[30px]" >
@@ -23,7 +25,10 @@ export default function MovieCard ({ slug, name, category, thumbnail }){
                         -translate-x-1/2 z-20 transition ease-in-out duration-500">
                         <img src="/icons/ic_play.svg" className="" width="50" alt=""/>
                     </div>
-                    <a href={slug} className="inset-0 absolute z-50"></a>
-                    </div>
+                    <Link
+                        href={route("prototype.movie.show", slug)}
+                        className="inset-0 absolute z-50"
+                    ></Link>                    
+                </div>
     );
 }
