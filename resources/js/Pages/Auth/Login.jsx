@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Checkbox from '@/Components/Checkbox';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
+import Input from "@/Components/Input";
+import Label from "@/Components/Label";
+import Button from "@/Components/Button";
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 
-export default function Login({ status, canResetPassword }) {
+export default function Login() {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -21,7 +19,7 @@ export default function Login({ status, canResetPassword }) {
     }, []);
 
     const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        setData(event.target.name, event.target.value);
     };
 
     const submit = (e) => {
@@ -31,64 +29,97 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <Guest>
-            <Head title="Log in" />
-
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
-            <ValidationErrors errors={errors} />
-
-            <form onSubmit={submit}>
-                <div>
-                    <Label forInput="email" value="Email" />
-
-                    <Input
-                        type="text"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                    />
+        <>
+        <Head title="Sign In"/>
+        <div className="mx-auto max-w-screen min-h-screen bg-black text-white md:px-10 px-3">
+            <div className="fixed top-[-50px] hidden lg:block">
+            <img src="/images/signup-image.png"
+                className="hidden laptopLg:block laptopLg:max-w-[450px] laptopXl:max-w-[640px]" alt=""/>
+        </div>
+    <div className="py-24 flex laptopLg:ml-[680px] laptopXl:ml-[870px]">
+        <div>
+            <img src="/images/moonton-white.svg" alt=""/>
+            <div className="my-[70px]">
+                <div className="font-semibold text-[26px] mb-3">
+                    Welcome Back
                 </div>
-
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
-
-                    <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        handleChange={onHandleChange}
-                    />
+                <p className="text-base text-[#767676] leading-7">
+                    Explore our new movies and get <br/>
+                    the better insight for your life
+                </p>
+                <ValidationErrors errors={errors}/>
+            </div>
+            <form className="w-[370px]" onSubmit={submit}>
+                <div className="flex flex-col gap-6">
+                    <div>
+                        {/* <label className="text-base block mb-2">Email Address</label> */}
+                        {/* <input 
+                            type="email" name="email"
+                            className="rounded-2xl bg-form-bg py-[13px] px-7 w-full focus:outline-alerange focus:outline-none"
+                            placeholder="Email Address" /> */}
+                            <Label
+                            forInput="email"
+                            value="Email Address"
+                            />
+                            <Input
+                                type="email"
+                                name="email"
+                                // className="rounded-2xl bg-form-bg py-[13px] px-7 w-full focus:outline-alerange focus:outline-none"
+                                value={data.email}
+                                placeholder="Email Address"
+                                isFocused={true}
+                                handleChange={onHandleChange}
+                            />
+                    </div>
+                    <div>
+                        <Label
+                            forInput="password"
+                            value="Password"
+                            />
+                        <Input
+                            type="password"
+                            name="password"
+                            // className="rounded-2xl bg-form-bg py-[13px] px-7 w-full focus:outline-alerange focus:outline-none"
+                            placeholder="Password"
+                            value={data.password}
+                            handleChange={onHandleChange}
+                        />
+                    </div>
                 </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
-
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900"
+                <div className="grid space-y-[14px] mt-[30px]">
+                    {/* <a href="/" className="rounded-2xl bg-alerange py-[13px] text-center">
+                        <span className="text-base font-semibold">
+                            Start Watching
+                        </span>
+                    </a> */}
+                    {/* <a href="sign_up.html" className="rounded-2xl border border-white py-[13px] text-center">
+                        <span className="text-base text-white">
+                            Create New Account
+                        </span>
+                    </a> */}
+                    
+                        <Button type="submit" variant="primary" processing={processing}> 
+                            <span className="text-base font-semibold">
+                                Start Watching
+                            </span>
+                        </Button>
+                        
+                    <Link href={route("register")}>
+                        <Button
+                            type="button"
+                            variant="light-outline"
                         >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <Button className="ml-4" processing={processing}>
-                        Log in
-                    </Button>
+                            <span className="text-base text-white">
+                                Create New Account
+                            </span>
+                        </Button>
+                    </Link>                   
                 </div>
             </form>
-        </Guest>
+        </div>
+    </div>
+</div>
+</>
     );
+
 }
