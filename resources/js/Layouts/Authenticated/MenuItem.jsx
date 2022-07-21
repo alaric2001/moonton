@@ -25,7 +25,6 @@ export default function MenuItem ({link, icon, text, isActive, method = 'get'}) 
 
             {icon}
             {text}
-            Discover
         </Link>
     );
 }

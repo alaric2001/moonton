@@ -1,7 +1,6 @@
 import SubscriptionDetail from "./SubscriptionDetail"
 import MenuItem from "./MenuItem";
 import { UserMenu, UserOthers } from "./MenuList";
-import { Link } from "@inertiajs/inertia-react"
 
 
 export default function Sidebar({ auth }){
