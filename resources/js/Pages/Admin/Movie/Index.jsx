@@ -1,11 +1,13 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
 import Button from "@/Components/Button";
-import { Link } from "@inertiajs/inertia-react";
+import { Link, Head, useForm } from "@inertiajs/inertia-react";
 import FlashMessage from "@/Components/FlashMessage";
 
 export default function Index ({auth, flashMessage, movies}){
+    const { delete: destroy, put } = useForm();
     return (
        <Authenticated auth={auth}>
+        <Head title="List of Movies"/>
         <Link href={route("admin.dashboard.movie.create")}>
             <Button
             type="button"
@@ -51,6 +53,12 @@ export default function Index ({auth, flashMessage, movies}){
                         </td>
                         <td>
                             <div onClick={() => {
+                                // destroy(
+                                //     route(
+                                //         "admin.dashboard.movie.destroy", 
+                                //         movie.id
+                                //         )
+                                //     );
                                     movie.deleted_at ? put(
                                         route(
                                             "admin.dashboard.movie.restore",
@@ -67,6 +75,7 @@ export default function Index ({auth, flashMessage, movies}){
                                     {movie.deleted_at
                                         ? "Restore"
                                         : "Delete"}
+                                        {/* Delete */}
                                 </Button>
                             </div>
                         </td>
