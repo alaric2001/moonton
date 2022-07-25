@@ -35,6 +35,9 @@ use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 //     ]);
 // });
 
+// MIDTRANS ROUTE
+Route::post('midtrans/notification', [SubscriptionPlanController::class, 'midtransCallback']);
+
 Route::redirect('/', '/login');
 
 // Route::get('/dashboard', function () {

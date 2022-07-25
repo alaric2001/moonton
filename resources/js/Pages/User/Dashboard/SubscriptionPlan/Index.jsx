@@ -1,8 +1,9 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
 import SubscriptionCard from "@/Components/SubscriptionCard";
 import {Inertia} from "@inertiajs/inertia";
+import { Head } from "@inertiajs/inertia-react";
 
-export default function SubscriptionPlan ({auth, subscriptionPlans}) {
+export default function SubscriptionPlan ({auth, subscriptionPlans, env }) {
     const selectSubscription = (id) => {
         // alert(id)
         // Inertia.get(route('user.dashboard.subscriptionPlan.userSubscribe', id));
@@ -10,13 +11,13 @@ export default function SubscriptionPlan ({auth, subscriptionPlans}) {
             route("user.dashboard.subscriptionPlan.userSubscribe", {
                 subscriptionPlan: id,
             }),
-            // {},
-            // {
-            //     only: ["userSubscription"],
-            //     onSuccess: ({ props }) => {
-            //         onSnapMidtrans(props.userSubscription);
-            //     },
-            // }
+            {},
+            {
+                only: ["userSubscription"],
+                onSuccess: ({ props }) => {
+                    onSnapMidtrans(props.userSubscription);
+                },
+            }
         );
     };
 
@@ -25,6 +26,7 @@ export default function SubscriptionPlan ({auth, subscriptionPlans}) {
             // Optional
             onSuccess: function (result) {
                 Inertia.visit(route("user.dashboard.index"));
+                // console.log({ result });
             },
             // Optional
             onPending: function (result) {
@@ -39,6 +41,12 @@ export default function SubscriptionPlan ({auth, subscriptionPlans}) {
     
     return (
       <Authenticated auth={auth}>
+        <Head title="Subscription Plan">
+            <script
+                src="https://app.sandbox.midtrans.com/snap/snap.js"
+                data-client-key={env.MIDTRANS_CLIENTKEY}
+            ></script>
+        </Head>
         <div className="ml-[300px] px-[50px]">
             <div className="py-20 flex flex-col items-center">
                 <div className="text-black font-semibold text-[26px] mb-3">
